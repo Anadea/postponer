@@ -34,8 +34,9 @@ pry(main)> w.estimate
   Story Load (0.7ms)  SELECT  "stories".* FROM "stories"  ORDER BY "stories"."id" ASC LIMIT 1
 => 1320
 ```
+и видим запрос за историей.
 
-и только для определённых методов, на которые реагирует официант
+Бывают случаи когда хочется ограничить делегирование методов, на которые реагирует официант
 
 ```ruby
 pry(main)> w = Waiter.new(:estimate) { Story.first }
