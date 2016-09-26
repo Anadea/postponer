@@ -13,6 +13,10 @@ module Waiter
   end
 
   class Base
+    def initialize(&block)
+      @block = block
+    end
+
     def object
       defined?(@_object) ? @_object : @_object = @block.call
     end
@@ -27,17 +31,13 @@ module Waiter
 
   class DelegateSpecific < Base
     def initialize(*available_methods, &block)
-      @block = block
+      super(&block)
       extend SingleForwardable
       def_delegators :object, *available_methods
     end
   end
 
   class DelegateAll < Base
-    def initialize(&block)
-      @block = block
-    end
-
     def method_missing(*args, &block)
       object.public_send *args, &block
     end
