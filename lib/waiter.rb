@@ -1,25 +1,45 @@
 require "waiter/version"
+require "forwardable"
 
 module Waiter
-  class Waiter
-    attr_accessor :executing_block
+  extend self
 
+  def serve(*available_methods, &block)
+    if available_methods.empty?
+      DelegateAll.new(&block)
+    else
+      DelegateSpecific.new(*available_methods, &block)
+    end
+  end
+
+  class Base
+    def initialize(&block)
+      @block = block
+    end
+
+    def object
+      defined?(@_object) ? @_object : @_object = @block.call
+    end
+
+    # Это костыль, потому что в Forwardable какой-то баг
+    # Его вроде исправляли: https://bugs.ruby-lang.org/issues/12478
+    # Но у меня в 2.3.1 он снова есть
+    def method_defined?(name)
+      methods.include?(name.to_sym)
+    end
+  end
+
+  class DelegateSpecific < Base
     def initialize(*available_methods, &block)
-      self.executing_block = block
+      super(&block)
+      extend SingleForwardable
+      def_delegators :object, *available_methods
+    end
+  end
 
-      if available_methods.empty?
-        self.class.send(:define_method, :method_missing) do |m, *args, &block|
-          executing_block.call().send(m, *args, &block)
-        end
-      else
-        self.class.delegate(*available_methods, to: :executing_block_result)
-
-        class << self
-          def executing_block_result
-            executing_block.call()
-          end
-        end
-      end
+  class DelegateAll < Base
+    def method_missing(*args, &block)
+      object.public_send *args, &block
     end
   end
 end
