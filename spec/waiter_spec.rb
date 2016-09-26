@@ -18,7 +18,7 @@ describe Waiter do
 
     it "returns correct result" do
       result = Waiter.serve { side_effect_call!; 2 }
-      expect(result.to_i).to eq(2)
+      expect(result + 1).to eq(3)
     end
 
     it "calculates only once" do
