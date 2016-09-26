@@ -42,10 +42,6 @@ NoMethodError: undefined method `id' for #<Waiter:0x007fa3c05ecae8>
 from (pry):56:in `<main>'
 ```
 
-## Todo
-
-* Тесты
-
 ## License
 
 [MIT](http://opensource.org/licenses/MIT).

@@ -1,4 +1,5 @@
 require "waiter/version"
+require "forwardable"
 
 module Waiter
   extend self
