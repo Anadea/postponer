@@ -57,6 +57,11 @@ w = waiter { Story.first }
 
 Пока работает как Waiter::Waiter.new и нет сил ковырять
 
+## Todo
+
+# Кэширование блока
+# Тесты
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
