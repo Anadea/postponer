@@ -1,4 +1,4 @@
-# Waiter
+# Postponer
 
 Такая штука для того, чтоб делать запуск какого-то куска кода только по обращению к одному из его методов/свойств. Предполагается использование вместо ActiveRecord::Relation при отсутствии оного. Фактически это делегатор к результатам блока.
 
@@ -6,7 +6,7 @@
 
 ```ruby
 # Gemfile
-gem 'waiter'
+gem 'postponer'
 ```
 
 ```
@@ -16,8 +16,8 @@ $ bundle
 ## Использование
 
 ```ruby
-pry(main)> w = Waiter.serve { Story.first }
-=> #<Waiter:0x007fa3c3ea1280 @executing_block=#<Proc:0x007fa3c3ea1208@(pry):42>>
+pry(main)> w = Postponer.defer { Story.first }
+=> #<Postponer:0x007fa3c3ea1280 @executing_block=#<Proc:0x007fa3c3ea1208@(pry):42>>
 ```
 Запроса за историей нет
 
@@ -32,13 +32,13 @@ pry(main)> w.estimate
 Бывают случаи когда хочется ограничить делегирование методов, на которые реагирует официант
 
 ```ruby
-pry(main)> w = Waiter.serve(:estimate) { Story.first }
-=> #<Waiter:0x007fa3c05ecae8 @executing_block=#<Proc:0x007fa3c05eca20@(pry):54>>
+pry(main)> w = Postponer.defer(:estimate) { Story.first }
+=> #<Postponer:0x007fa3c05ecae8 @executing_block=#<Proc:0x007fa3c05eca20@(pry):54>>
 pry(main)> w.estimate
   Story Load (0.8ms)  SELECT  "stories".* FROM "stories"  ORDER BY "stories"."id" ASC LIMIT 1
 => 1320
 pry(main)> w.id
-NoMethodError: undefined method `id' for #<Waiter:0x007fa3c05ecae8>
+NoMethodError: undefined method `id' for #<Postponer:0x007fa3c05ecae8>
 from (pry):56:in `<main>'
 ```
 
