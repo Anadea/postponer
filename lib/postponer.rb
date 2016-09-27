@@ -1,7 +1,7 @@
-require "waiter/version"
+require "postponer/version"
 require "forwardable"
 
-module Waiter
+module Postponer
   extend self
 
   def serve(*available_methods, &block)

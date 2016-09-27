@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'waiter/version'
+require 'postponer/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "waiter"
-  spec.version       = Waiter::VERSION
+  spec.name          = "postponer"
+  spec.version       = Postponer::VERSION
   spec.authors       = ["Alexander Rjazantsev"]
   spec.email         = ["shurik.v.r@gmail.com"]
 
   spec.summary       = %q{Simplest delayed loader possible}
-  spec.homepage      = "https://gitlab.anahoret.com/anadea/waiter"
+  spec.homepage      = "https://gitlab.anahoret.com/anadea/postponer"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
