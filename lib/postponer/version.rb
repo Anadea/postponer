@@ -1,3 +1,3 @@
 module Postponer
-  VERSION = "0.0.1a"
+  VERSION = "1.0.0rc"
 end
