@@ -4,7 +4,7 @@ require "forwardable"
 module Postponer
   extend self
 
-  def serve(*available_methods, &block)
+  def defer(*available_methods, &block)
     if available_methods.empty?
       DelegateAll.new(&block)
     else

@@ -16,7 +16,7 @@ $ bundle
 ## Использование
 
 ```ruby
-pry(main)> w = Postponer.serve { Story.first }
+pry(main)> w = Postponer.defer { Story.first }
 => #<Postponer:0x007fa3c3ea1280 @executing_block=#<Proc:0x007fa3c3ea1208@(pry):42>>
 ```
 Запроса за историей нет
@@ -32,7 +32,7 @@ pry(main)> w.estimate
 Бывают случаи когда хочется ограничить делегирование методов, на которые реагирует официант
 
 ```ruby
-pry(main)> w = Postponer.serve(:estimate) { Story.first }
+pry(main)> w = Postponer.defer(:estimate) { Story.first }
 => #<Postponer:0x007fa3c05ecae8 @executing_block=#<Proc:0x007fa3c05eca20@(pry):54>>
 pry(main)> w.estimate
   Story Load (0.8ms)  SELECT  "stories".* FROM "stories"  ORDER BY "stories"."id" ASC LIMIT 1
