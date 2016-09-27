@@ -12,6 +12,8 @@ module Postponer
     end
   end
 
+  alias_method :postpone, :defer
+
   class Base
     def initialize(&block)
       @block = block
