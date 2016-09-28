@@ -1,6 +1,6 @@
 # Postponer
 
-Such a thing in order to make the execution of a piece of code only in reference to one of its methods / properties. It is supposed to use instead of ActiveRecord::Relation in the absence thereof. In fact, this is a delegator to the results of the block.
+Such a thing in order to make the execution of a piece of code only in call one of its methods / properties. It is supposed to use instead of ActiveRecord::Relation in the absence thereof. In fact, this is a delegator to the results of the block.
 
 ## Install
 
